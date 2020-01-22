@@ -1,0 +1,21 @@
+{
+  "name": "aspnetcore2coreui-master",
+  "version": "1.0.0",
+  "description": "This repo contains a standard ASP.NET Core 2.1 MVC Visual Studio 2017 template project with a twist.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": [
+      "npm install",
+      "bower install",
+      "gulp clean",
+      "gulp min"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ol": "^6.1.1",
+    "plotty": "^0.4.1"
+  }
+}

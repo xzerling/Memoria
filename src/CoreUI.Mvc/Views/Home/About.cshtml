@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<CoreUI.Mvc.Models.SensorModel>
+@{
+  ViewBag.Title = "Sensores";
+}
+
+<h2>Sensores</h2>
+<table class="table">
+  <tr>
+    <th>M</th>
+    <th>T</th>
+    <th>H</th>
+    <th>I</th>
+    <th>O</th>
+
+
+
+
+  </tr>
+  @foreach (var item in Model)
+  {
+<tr>
+  <td>
+    @Html.DisplayFor(modelItem => item.M)
+  </td>
+  <td>
+    @Html.DisplayFor(modelItem => item.T)
+  </td>
+  <td>
+    @Html.DisplayFor(modelItem => item.H)
+  </td>
+  <td>
+    @Html.DisplayFor(modelItem => item.I)
+  </td>
+  <td>
+    @Html.DisplayFor(modelItem => item.O)
+  </td>
+</tr>
+  }
+</table>
