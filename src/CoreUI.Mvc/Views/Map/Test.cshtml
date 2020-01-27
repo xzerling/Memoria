@@ -15,53 +15,85 @@
 
     <h2>Mapa de Prueba</h2>
 
-    <div class="container">
-
-      <div class="row justify-content-start">
+    <div class="card">
+      <div class="card-body">
         <div id="map" class="map"></div>
-
-        <div class="col-4">
-
-          <div class="container">
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio1">NDVI</label>
-            </div>
-
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio2">ET24</label>
-            </div>
-
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio3">LAI</label>
-            </div>
-
-            <div>
-              <button type="button" id="save" class = "btn btn-success">Guardar poligono</button>
-            </div>
-
-            <form class="form-inline">
-              <label>Geometry type &nbsp;</label>
-              <select id="type">
-                <option value="Polygon">Polygon</option>
-                <!--
-                <option value="Point">Point</option>
-                <option value="LineString">LineString</option>
-                <option value="Circle">Circle</option>
-                -->
-              </select>
-            </form>
-
-          </div>
-        </div>
-
       </div>
     </div>
 
+    <div class="container">
+
+      <div class="row justify-content-start">
+
+
+
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <h1>Indicadores</h1>
+
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">NDVI</label>
+                  </div>
+
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">ET24</label>
+                  </div>
+
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio3">LAI</label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+
+                  <div>
+                    <button type="button" id="save" class="btn btn-success">Guardar poligono</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+
+
+
+
+
+
+
+          <form class="form-inline">
+            <label>Geometry type &nbsp;</label>
+            <select id="type">
+              <option value="Polygon">Polygon</option>
+              <!--
+        <option value="Point">Point</option>
+        <option value="LineString">LineString</option>
+        <option value="Circle">Circle</option>
+        -->
+            </select>
+          </form>
+
+
+        </div>
+      </div>
+
     <button type="button" id="b1" value="btn1" onclick="addInteraction(); disableB1()" class="btn btn-primary btn-lg btn-block">Dibujar Poligono</button>
-    <button type="button" id="b2" value="btn2" onclick="removeInteraction(); disableB2()" disabled="true"  class="btn btn-primary btn-lg btn-block">Terminar</button>
+    <button type="button" id="b2" value="btn2" onclick="removeInteraction(); disableB2()" disabled="true" class="btn btn-primary btn-lg btn-block">Terminar</button>
 
   </body>
 </html>
@@ -195,8 +227,8 @@
   }
 
   .map {
-    height: 100%;
-    width: 80%;
+    height: 70%;
+    width: 100%;
   }
 </style>
 
