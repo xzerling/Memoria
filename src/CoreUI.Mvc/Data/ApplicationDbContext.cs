@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using CoreUI.Mvc.Models;
 
 namespace CoreUI.Mvc.Data
 {
@@ -12,5 +13,7 @@ namespace CoreUI.Mvc.Data
             : base(options)
         {
         }
+
+        public DbSet<SensorModel> ns1 { get; set; }
     }
 }

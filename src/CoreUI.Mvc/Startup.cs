@@ -46,7 +46,8 @@ namespace CoreUI.Mvc
             //Lista de conecciones de BD, Revisar appsettings.json
 
             //services.Add(new ServiceDescriptor(typeof(SensoresContext), new SensoresContext(Configuration.GetConnectionString("mysqlConnection"))));
-            services.Add(new ServiceDescriptor(typeof(SensoresContext), new SensoresContext(Configuration.GetConnectionString("RDS"))));
+            services.Add(new ServiceDescriptor(typeof(SensoresContext), new SensoresContext(Configuration.GetConnectionString("RDS"), Configuration.GetConnectionString("DefaultConnection"))));
+
 
 
         }

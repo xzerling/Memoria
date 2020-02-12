@@ -1,0 +1,378 @@
+﻿@model IEnumerable<CoreUI.Mvc.Models.AgrodatosModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+  ViewBag.Title = "Agrodatos";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<button type="button" asp-controller="Agrodatos" asp-action="NombreSensores" class="btn btn-primary" data-toggle="modal" data-target=".cd-example-modal-lg">Formulario</button>
+
+<div class="modal fade cd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+
+      <div class="card">
+        <div class="card-header">
+          <strong>Descarga de datos</strong>
+          Agroclimatologicos
+        </div>
+        <div class="card-body">
+
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="select1">Estación</label>
+            <div class="col-md-9">
+              <select id="select1" name="select1" class="form-control">
+                <option>Selecionar una estación</option>
+                @foreach (var item in Model)
+                {
+
+                  <option value=@Html.DisplayTextFor(modelItem => item.Id)> @Html.DisplayFor(modelItem => item.NombreEstacion)</option>
+
+
+
+                }
+              </select>
+
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="select2">Datos</label>
+            <div class="col-md-9">
+              <select id="select2" name="select2" class="form-control">
+                <option value="0">Elegir Opción</option>
+                <option value="1">Datos cada 15 minutos</option>
+                <option value="2">Datos diarios</option>
+
+              </select>
+
+            </div>
+          </div>
+
+
+          <div class="form-group row" >
+            <label class="col-md-3 col-form-label">Sensores Disponibles</label>
+            <div class="col-md-9 col-form-label" id="divSensorType">
+              <input class="form-control" type="text" placeholder="No se han encontrado sensores" readonly>
+              <!--Aqui van los checkbox en funcion de la esacion seleccionada
+                  Son llamados en el script-->
+            </div>
+
+
+
+
+
+            </div>
+
+
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="password-inputate-input">Fecha Desde</label>
+            <div class="col-md-9">
+              <input type="date" id="fecha1" name="fecha1" class="form-control" placeholder="Fecha">
+              <span class="help-block">Ingresar fecha de inicio</span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="password-inputate-input">Fecha Hasta</label>
+            <div class="col-md-9">
+              <input type="date" id="fecha2" name="fecha2" class="form-control" placeholder="Fecha">
+              <span class="help-block">Ingresar fecha de inicio</span>
+            </div>
+          </div>
+
+
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Opciónes Avanzadas
+          </button>
+
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+
+
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="select3">Separador de Datos</label>
+                <div class="col-md-9">
+                  <select id="select3" name="select3" class="form-control">
+                    <option value="1">Punto y Coma (Excel)</option>
+                    <option value="2">Coma (OpenOffice)</option>
+                    <option value="3">Tabulador</option>
+
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="select4">Separador de decimales</label>
+                <div class="col-md-9">
+                  <select id="select4" name="select4" class="form-control">
+                    <option value="1">Punto</option>
+                    <option value="2">Coma</option>
+
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="select5">Separador de miles</label>
+                <div class="col-md-9">
+                  <select id="select5" name="select5" class="form-control">
+                    <option value="1">Sin separador</option>
+                    <option value="2">Punto</option>
+                    <option value="2">Coma</option>
+
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="select6">Máximo de filas</label>
+                <div class="col-md-9">
+                  <select id="select6" name="select6" class="form-control">
+                    <option value="1">65535 Excel 2003 y OpenOffice</option>
+                    <option value="2">1048576 Excel 2007</option>
+
+                  </select>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary" id="Descargar" onclick="hola()">
+              <i class="fa fa-dot-circle-o"></i> Descargar
+            </button>
+            <button type="reset" class="btn btn-sm btn-danger" asp-action="NombreSensores" asp-controller="Agrodatos">
+              <i class="fa fa-ban"></i> Reset
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+  function hola() {
+    //console.log("hola");
+    
+      console.log("hola");
+      var estacion = document.getElementById("select1").value;
+      var datos = document.getElementById("select2").value;
+      var fechaI = document.getElementById("fecha1").value;
+      var fechaT = document.getElementById("fecha2").value;
+    var sensores = document.getElementById("divSensorType");
+
+    var checked = [];
+    $.each(function (i) {    
+      $("input[name='check" + i + "']:checked");
+              checked.push($(this).val());
+              console.log($(this).val());
+            });
+
+
+
+      //console.log("En Recuperar datos")
+      sendData(estacion, datos, fechaI, fechaT);
+
+      function sendData(estacion, datos, fechaI, fechaT) {
+        $.ajax(
+          {
+            type: "POST",
+            url: "@Url.Action("EnviarConsulta", "AgroDatos")",
+            data: {
+              estacion: estacion,
+              datos: datos,
+              fechaI: fechaI,
+              fechaT: fechaT
+            },
+
+            error: function (jqXHR, exception) {
+              var msg = '';
+              if (jqXHR.status === 0) {
+                msg = 'Not connect.\n Verify Network.';
+              } else if (jqXHR.status == 404) {
+                msg = 'Requested page not found. [404]';
+              } else if (jqXHR.status == 500) {
+                msg = 'Internal Server Error [500].';
+              } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+              } else if (exception === 'timeout') {
+                msg = 'Time out error.';
+              } else if (exception === 'abort') {
+                msg = 'Ajax request aborted.';
+              } else {
+                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+              }
+              alert("error");
+              console.log(msg);
+            },
+
+            success:function (data, status) {
+              console.log("success");
+                var blob = new Blob([data]);
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "test.csv";
+                link.click();
+                console.log("despues de la descarga");
+              //alert(status);
+              $.each(data, function (i, Reporte) {
+                //console.log("salida: " + Reporte.fecha + " " + Reporte.hora + " " + Reporte.datos);
+
+
+                //console.log(Reporte.hora);
+                //console.log(Reporte.datos);
+
+              });
+            }
+          })
+
+
+      }
+
+  }
+</script>
+
+
+<script>
+
+  function obtenerDatos() {
+    var estacion = document.getElementById("select1").value;
+    var datos = document.getElementById("select2").value;
+    var fechaI = document.getElementById("fecha1").value;
+    var fechaT = document.getElementById("fecha2").value;
+    var sensores = document.getElementById("divSensorType");
+    /*for (int i = 0; i < sensores.children.length; i++)
+    {
+      var child = sensores.children[i];
+      console.log("Sensores: " + child);
+    }*/
+    var child = sensores.children[0];
+    console.log("Child: " + child);
+    
+    console.log("Estacion: " + estacion);
+    console.log("Datos: " + datos);
+    console.log("Inicio: " + fechaI);
+    console.log("Termino: " + fechaT);
+    
+
+    //OPCIONES AVANZADAS
+
+    var separadorDatos = document.getElementById("select3").value;
+    var separadorDecimal = document.getElementById("select4").value;
+    var separadorMiles = document.getElementById("select5").value;
+    var maxFilas = document.getElementById("select6").value;
+    console.log("Sep datos: " + separadorDatos);
+    console.log("Sep decimal: " + separadorDecimal);
+    console.log("sep miles: " + separadorMiles);
+    console.log("maxFila: " + maxFilas);
+
+   
+  }
+
+  
+
+  
+  $('#select1').change(function () {
+    var id = document.getElementById("select1").value;
+    console.log("SET FORMCONTROL");
+    console.log("SET FORMCONTROLaaa");
+    console.log("ID: "+id);
+    getSensorNames(id);
+
+    function getSensorNames(id) {
+      console.log("funcion y el id: "+id);
+      $.ajax(
+        {
+          type: "GET",
+          url: '@Url.Action("NombreSensores", "AgroDatos")',
+          data: {
+            id: id
+          },
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          error: function (jqXHR, exception) {
+            var msg = '';
+            if (jqXHR.status === 0) {
+              msg = 'Not connect.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+              msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 500) {
+              msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+              msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+              msg = 'Time out error.';
+            } else if (exception === 'abort') {
+              msg = 'Ajax request aborted.';
+            } else {
+              msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            alert("error");
+            console.log(msg);
+          },
+
+          success: function (data, status, result, lista) {
+            //console.log(data.lista.length())
+            //console.log(Object.values(data));
+            //console.log(lista);
+            //alert(Object.values(data) + "\nStatus: " + status);
+            //console.log(data.length);
+
+            if (data.length > 0) {
+              var checkBox = '<div class="col-md-9 col-form-label" id="divSensorType">';
+              
+              
+              
+                    
+              $.each(data, function (i, Sensor) {
+                //checkBox += '<div class="form-check form-check-inline">';
+                checkBox += '<div class="custom-control custom-checkbox custom-control-inline">';
+                checkBox += '<input class="custom-control-input" type="checkbox" value = "' + Sensor.id + '" id = "check' + i + '"checked>';
+                checkBox += '<label class="custom-control-label" for= "check' + i + '">' + Sensor.nombreSensor + '</label ></div>';
+              });
+              //checkBox += '</div>';
+              //console.log("string: " + checkBox + "\n");
+              $('#divSensorType').replaceWith(checkBox);
+            }
+           
+              /*if (result == true) {
+                  var baseUrl="/Agrodatos";
+                window.location.reload();
+                console.log("exito");
+              }
+              else {
+                  alert("There is a problem, Try Later!");
+              }*/
+          }
+        })
+    }
+
+
+  });
+
+
+</script>
+
+

@@ -9,8 +9,6 @@ namespace CoreUI.Mvc.Controllers
     public class MapController : Controller
     {
 
-        
-
         public IActionResult Test()
         {
             return View();
