@@ -12,7 +12,7 @@
   "main": "dist/main.js",
   "dependencies": {
     "pako": "^1.0.3",
-    "xmldom": "0.1.*"
+    "xmldom": "0.5.*"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
